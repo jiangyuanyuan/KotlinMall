@@ -5,5 +5,6 @@ import com.kotlin.base.presenter.view.BaseView
 /**
  * Created by jiangyuanyuan on 18/3/18.
  */
-class BasePresenter <T : BaseView>{
+open class BasePresenter <T : BaseView>{
+    lateinit var mView : T
 }

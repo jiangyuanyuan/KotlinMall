@@ -8,7 +8,7 @@ import com.kotlin.base.presenter.view.BaseView
  */
 open class BaseMvpActivity<T : BasePresenter<*> >: BaseActivity(),BaseView{
 
-
+    lateinit var mPresenter : T
 
     override fun showLoading() {
     }
