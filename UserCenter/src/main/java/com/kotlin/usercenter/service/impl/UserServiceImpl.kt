@@ -6,10 +6,10 @@ import rx.Observable
 /**
  * Created by jiangyuanyuan on 20/3/18.
  */
-class UserServiceImpl : UserService{
+class UserServiceImpl : UserService {
     override fun register(mobile: String, code: String, pwd: String): Observable<Boolean> {
 
         //这里要去请求网络
-        return Observable.just(true)
+        return Observable.just(false)
     }
 }

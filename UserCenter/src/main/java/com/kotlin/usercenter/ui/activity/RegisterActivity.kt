@@ -11,7 +11,7 @@ import org.jetbrains.anko.toast
 
 class RegisterActivity : BaseMvpActivity<RegisterPresenter>(), RegisterView {
     override fun onRegisterResult(result: Boolean) {
-        toast("注册"+result)
+        toast("注册" + result)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -21,7 +21,7 @@ class RegisterActivity : BaseMvpActivity<RegisterPresenter>(), RegisterView {
         mPresenter = RegisterPresenter()
         mPresenter.mView = this
 
-        mBtnRegister.setOnClickListener { mPresenter.register("", "","") }
+        mBtnRegister.setOnClickListener { mPresenter.register("", "", "") }
 
     }
 }
