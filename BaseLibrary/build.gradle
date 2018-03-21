@@ -49,6 +49,14 @@ dependencies {
     compile 'io.reactivex:rxkotlin:1.0.0'
     compile 'io.reactivex:rxandroid:1.2.1'
 
+    //retrofit2
+    compile "com.squareup.okhttp3:okhttp:${ok_http_version}"
+    compile "com.squareup.retrofit2:retrofit:${retrofit_version}"
+    compile "com.squareup.okhttp3:logging-interceptor:${ok_http_version}"
+    compile "com.squareup.retrofit2:converter-gson:${retrofit_version}"
+    compile "com.squareup.retrofit2:adapter-rxjava:${retrofit_version}"
+
+
 }
 repositories {
     mavenCentral()
