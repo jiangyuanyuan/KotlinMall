@@ -1,5 +1,6 @@
 package com.kotlin.usercenter.di.module
 
+import com.kotlin.base.di.PreComponentSocpe
 import com.kotlin.usercenter.service.UserService
 import com.kotlin.usercenter.service.impl.UserServiceImpl
 import dagger.Module
