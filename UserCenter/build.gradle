@@ -4,6 +4,7 @@ if (isUserModule.toBoolean()){
     apply plugin: 'com.android.application'
 }
 apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-android-extensions'
 android {
     compileSdkVersion 26
@@ -50,6 +51,10 @@ dependencies {
     compile project(path: ':BaseLibrary')
     compile project(path: ':Provider')
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+
+    //Dagger2
+    compile "com.google.dagger:dagger:$dagger_version"
+    kapt "com.google.dagger:dagger-compiler:$dagger_version"
 
 //    // Anko Layouts
 //    compile "org.jetbrains.anko:anko-sdk25:$anko_version" // sdk15, sdk19, sdk21, sdk23 are also available
