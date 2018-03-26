@@ -12,6 +12,11 @@ import org.jetbrains.anko.toast
 
 
 class RegisterActivity : BaseMvpActivity<RegisterPresenter>(), RegisterView {
+    override fun initComponent() {
+        DaggerUserComponent.builder().activityComponent(activityComponent).userModule(UserModule()).build().inject(this)
+        mPresenter.mView = this
+    }
+
     override fun onRegisterResult(result: Boolean) {
         toast("注册" + result)
     }
@@ -20,13 +25,8 @@ class RegisterActivity : BaseMvpActivity<RegisterPresenter>(), RegisterView {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
 //        mPresenter = RegisterPresenter()
-        initInject()
         mBtnRegister.setOnClickListener { mPresenter.register(mMobileEt.text.toString(), mPwdEt.text.toString(), mCodeEt.text.toString()) }
 
     }
 
-     fun initInject(){
-         DaggerUserComponent.builder().activityComponent(activityComponent).userModule(UserModule()).build().inject(this)
-         mPresenter.mView = this
-     }
 }
