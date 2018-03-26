@@ -4,7 +4,6 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.content.SharedPreferences.Editor
 import com.kotlin.base.BaseApplication
-import com.kotlin.base.common.BaseApplication
 import com.kotlin.base.common.BaseConstant
 
 /*
