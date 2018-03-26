@@ -9,6 +9,7 @@ import com.kotlin.base.di.module.ActivityModule
 import com.kotlin.base.di.module.LifecycleProviderModule
 import com.kotlin.base.presenter.BasePresenter
 import com.kotlin.base.presenter.view.BaseView
+import com.kotlin.base.widgets.ProgressLoading
 import javax.inject.Inject
 
 /**
@@ -20,12 +21,14 @@ abstract class BaseMvpActivity<T : BasePresenter<*>> : BaseActivity(), BaseView 
 
     lateinit var activityComponent: ActivityComponent
 
-    override fun showLoading() {
+    lateinit var progressLoading: ProgressLoading
 
+    override fun showLoading() {
+        progressLoading.showLoading()
     }
 
     override fun hideLoading() {
-
+        progressLoading.hideLoading()
     }
 
     override fun onError() {
@@ -36,6 +39,7 @@ abstract class BaseMvpActivity<T : BasePresenter<*>> : BaseActivity(), BaseView 
         super.onCreate(savedInstanceState)
         initActivityInject()
         initComponent()
+        progressLoading = ProgressLoading.create(this)
     }
 
     protected abstract fun initComponent()
