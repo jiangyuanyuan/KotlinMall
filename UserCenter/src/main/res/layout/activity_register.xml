@@ -7,10 +7,11 @@
     tools:context="com.kotlin.usercenter.ui.activity.RegisterActivity"
     android:orientation="vertical">
 
-    <com.kotlin.base.widgets.HanderBar
+    <com.kotlin.base.widgets.HeaderBar
         style="@style/MatchWrap"
         app:isShowBack="true"
-        app:titleText ="注册" />
+        app:titleText ="注册"
+        app:rightText = "登录"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
