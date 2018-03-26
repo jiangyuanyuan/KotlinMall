@@ -20,28 +20,9 @@ class RegisterPresenter @Inject constructor(): BasePresenter<RegisterView>() {
         userService.register(mobile, pwd, code)
                 .execute(object : BaseSubscriber<Boolean>() {
                     override fun onNext(t: Boolean) {
-                        mView.onRegisterResult(t)
+                        if (t)
+                        mView.onRegisterResult("注册成功")
                     }
                 },lifecycleProvider)
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribeOn(Schedulers.io())
-//                .subscribe(object : BaseSubscriber<Boolean>(){
-//                    override fun onNext(t: Boolean) {
-//                        mView.onRegisterResult(t)
-//                    }
-//                })
-//                .subscribe(object : Subscriber<Boolean>(){
-//                    override fun onCompleted() {
-//                    }
-//
-//                    override fun onError(e: Throwable?) {
-//                    }
-//
-//                    override fun onNext(t: Boolean) {
-//                        mView.onRegisterResult(t)
-//                    }
-//
-//                })
-
     }
 }

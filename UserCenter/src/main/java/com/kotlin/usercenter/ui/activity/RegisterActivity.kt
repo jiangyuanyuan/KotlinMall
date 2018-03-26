@@ -17,8 +17,8 @@ class RegisterActivity : BaseMvpActivity<RegisterPresenter>(), RegisterView {
         mPresenter.mView = this
     }
 
-    override fun onRegisterResult(result: Boolean) {
-        toast("注册" + result)
+    override fun onRegisterResult(result: String) {
+        toast(result)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
