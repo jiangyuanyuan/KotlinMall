@@ -10,6 +10,7 @@ import com.kotlin.base.di.module.LifecycleProviderModule
 import com.kotlin.base.presenter.BasePresenter
 import com.kotlin.base.presenter.view.BaseView
 import com.kotlin.base.widgets.ProgressLoading
+import org.jetbrains.anko.toast
 import javax.inject.Inject
 
 /**
@@ -31,8 +32,8 @@ abstract class BaseMvpActivity<T : BasePresenter<*>> : BaseActivity(), BaseView 
         progressLoading.hideLoading()
     }
 
-    override fun onError() {
-
+    override fun onError(text:String) {
+        toast(text)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

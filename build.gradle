@@ -10,6 +10,7 @@ buildscript {
     ext.retrofit_version = '2.4.0'
     ext.dagger_version = '2.11'
     ext.rx_lifecycle_version = '1.0'
+    ext.glide_version = "3.7.0"
     repositories {
         google()
         jcenter()

@@ -1,6 +1,5 @@
 package com.kotlin.base.utils
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkInfo
@@ -19,8 +18,7 @@ object NetWorkUtils {
         return networkInfo != null && networkInfo.isConnected
     }
 
-    @SuppressLint("MissingPermission")
-/*
+    /*
         检测wifi是否连接
      */
     fun isWifiConnected(context: Context): Boolean {
