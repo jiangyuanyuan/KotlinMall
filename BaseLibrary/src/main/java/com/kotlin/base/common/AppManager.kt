@@ -49,6 +49,7 @@ class AppManager private constructor(){
     /*
         退出应用程序
      */
+
     @SuppressLint("MissingPermission")
     fun exitApp(context:Context){
         finishAllActivitys()
