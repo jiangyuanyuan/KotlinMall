@@ -1,6 +1,6 @@
-if (isUserModule.toBoolean()){
+if (isUserModule.toBoolean()) {
     apply plugin: 'com.android.library'
-}else{
+} else {
     apply plugin: 'com.android.application'
 }
 apply plugin: 'kotlin-android'

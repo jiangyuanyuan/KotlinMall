@@ -19,7 +19,6 @@ class RegisterPresenter @Inject constructor(): BasePresenter<RegisterView>() {
 
     fun register(mobile: String, pwd: String, code: String) {
         if (!checkNetWork()){
-            Log.d("网络连接","————————————失败:"+checkNetWork().toString())
             return
         }
         mView.showLoading()

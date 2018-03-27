@@ -3,6 +3,7 @@ package com.kotlin.usercenter.di.component
 import com.kotlin.base.di.PreComponentSocpe
 import com.kotlin.base.di.component.ActivityComponent
 import com.kotlin.usercenter.di.module.UserModule
+import com.kotlin.usercenter.ui.activity.LoginActivity
 import com.kotlin.usercenter.ui.activity.RegisterActivity
 import dagger.Component
 
@@ -14,4 +15,5 @@ import dagger.Component
 interface UserComponent {
     @PreComponentSocpe
     fun inject(activity : RegisterActivity)
+    fun inject(activity : LoginActivity)
 }

@@ -1,5 +1,6 @@
 package com.kotlin.usercenter.service
 
+import com.kotlin.usercenter.data.protocol.UserInfo
 import rx.Observable
 
 /**
@@ -7,4 +8,5 @@ import rx.Observable
  */
 interface UserService {
     fun register(mobile: String, pwd: String, code: String): Observable<Boolean>
+    fun login(mobile: String, pwd: String, pushId: String): Observable<UserInfo>
 }
