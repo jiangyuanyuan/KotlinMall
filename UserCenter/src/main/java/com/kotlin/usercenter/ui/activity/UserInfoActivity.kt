@@ -1,11 +1,21 @@
 package com.kotlin.usercenter.ui.activity
 
+import android.Manifest
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.os.Environment
+import android.util.Log
 import android.view.View
 import com.bigkoo.alertview.AlertView
 import com.bigkoo.alertview.OnItemClickListener
+import com.jph.takephoto.app.TakePhoto
+import com.jph.takephoto.app.TakePhotoImpl
+import com.jph.takephoto.compress.CompressConfig
+import com.jph.takephoto.model.TResult
 import com.kotlin.base.ext.onClick
 import com.kotlin.base.ui.activity.BaseMvpActivity
+import com.kotlin.base.utils.DateUtils
 import com.kotlin.usercenter.R
 import com.kotlin.usercenter.di.component.DaggerUserComponent
 import com.kotlin.usercenter.di.module.UserModule
@@ -13,14 +23,31 @@ import com.kotlin.usercenter.presenter.UserInfoPresenter
 import com.kotlin.usercenter.presenter.view.UserInfoView
 import kotlinx.android.synthetic.main.activity_user_info.*
 import org.jetbrains.anko.toast
+import java.io.File
+import android.Manifest.permission
+import android.Manifest.permission.WRITE_EXTERNAL_STORAGE
+import android.os.Build
 
 
-class UserInfoActivity : BaseMvpActivity<UserInfoPresenter>(), UserInfoView {
+
+
+class UserInfoActivity : BaseMvpActivity<UserInfoPresenter>(), UserInfoView , TakePhoto.TakeResultListener {
+    private lateinit var mTakePhoto: TakePhoto
+    private lateinit var mTempFile :File
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user_info)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            requestPermissions(arrayOf(Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE), 2)
+        }
         initView()
+        mTakePhoto =  TakePhotoImpl(this,this)
+        mTakePhoto.onCreate(savedInstanceState)
+    }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        mTakePhoto.onActivityResult(requestCode,resultCode,data)
     }
 
     override fun initComponent() {
@@ -37,13 +64,36 @@ class UserInfoActivity : BaseMvpActivity<UserInfoPresenter>(), UserInfoView {
         AlertView("选择图片", "", "取消", null, arrayOf("拍照", "相册"), this,
                 AlertView.Style.ActionSheet, object : OnItemClickListener {
             override fun onItemClick(o: Any?, position: Int) {
+                mTakePhoto.onEnableCompress(CompressConfig.ofDefaultConfig(),false)
                 when (position) {
-                    0 -> toast("拍照")
-                    1 -> toast("相册")
+                    0 -> {
+                        createTempFile()
+                        mTakePhoto.onPickFromCapture(Uri.fromFile(mTempFile))}
+                    1 -> mTakePhoto.onPickFromGallery()
                 }
             }
 
         }).show()
     }
+    override fun takeSuccess(result: TResult?) {
+        Log.d("拍照",result?.image?.originalPath)
+        Log.d("拍照",result?.image?.compressPath)
+    }
 
+    override fun takeCancel() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun takeFail(result: TResult?, msg: String?) {
+        Log.d("拍照",msg)
+    }
+
+    fun createTempFile(){
+        val tempFileName = "${DateUtils.curTime}.png"
+        if (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())){
+            this.mTempFile = File(Environment.getExternalStorageDirectory(),tempFileName)
+            return
+        }
+        this.mTempFile = File(filesDir,tempFileName)
+    }
 }
