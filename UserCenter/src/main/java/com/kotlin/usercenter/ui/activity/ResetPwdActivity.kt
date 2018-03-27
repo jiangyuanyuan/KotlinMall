@@ -39,16 +39,17 @@ class ResetPwdActivity : BaseMvpActivity<ResetPwdPresenter>(), ResetPwdView {
 
 
     private fun initView() {
-        mConfirmBtn.enable(mPwdEt,{isBtnEnable()})
-        mConfirmBtn.enable(mPwdConfirmEt,{isBtnEnable()})
+        mConfirmBtn.enable(mPwdEt, { isBtnEnable() })
+        mConfirmBtn.enable(mPwdConfirmEt, { isBtnEnable() })
 
-        mConfirmBtn.onClick {
-            if (mPwdEt.text.toString() != mPwdConfirmEt.text.toString()){
+        mConfirmBtn.setOnClickListener {
+            if (mPwdEt.text.toString() != mPwdConfirmEt.text.toString()) {
                 toast("密码不一致")
-                return@onClick
+                return@setOnClickListener
             }
-            mPresenter.resetPwd(intent.getStringExtra("mobile"),mPwdEt.text.toString())
+            mPresenter.resetPwd(intent.getStringExtra("mobile"), mPwdEt.text.toString())
         }
+        mHeaderBar.getLeftView().setOnClickListener { finish() }
     }
 
     private fun isBtnEnable(): Boolean {

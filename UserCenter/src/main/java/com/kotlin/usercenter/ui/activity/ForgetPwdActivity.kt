@@ -16,18 +16,24 @@ import org.jetbrains.anko.singleTop
 import org.jetbrains.anko.toast
 
 
-class ForgetPwdActivity : BaseMvpActivity<ForgetPwdPresenter>(), ForgetPwdView ,View.OnClickListener{
+class ForgetPwdActivity : BaseMvpActivity<ForgetPwdPresenter>(), ForgetPwdView, View.OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_forget_pwd)
         initView()
 
     }
+
     override fun onClick(view: View) {
-        when(view.id){
-            R.id.mNextBtn ->  { mPresenter.forgetPwd(mMobileEt.text.toString(), mVerifyCodeEt.text.toString()) }
+        when (view.id) {
+            R.id.mNextBtn -> {
+                mPresenter.forgetPwd(mMobileEt.text.toString(), mVerifyCodeEt.text.toString())
+            }
             R.id.mVerifyCodeBtn -> mVerifyCodeBtn.requestSendVerifyNumber()
             R.id.mLeftIv -> finish()
+            R.id.mVerifyCodeBtn -> {
+                mVerifyCodeBtn.requestSendVerifyNumber()
+            }
 
         }
     }
@@ -39,20 +45,20 @@ class ForgetPwdActivity : BaseMvpActivity<ForgetPwdPresenter>(), ForgetPwdView ,
 
     override fun onForgetPwdResult(result: String) {
         toast(result)
-        startActivity(intentFor<ResetPwdActivity>().putExtra("mobile",mMobileEt.text.toString()))
+        startActivity(intentFor<ResetPwdActivity>().putExtra("mobile", mMobileEt.text.toString()))
     }
 
 
     private fun initView() {
         mNextBtn.setOnClickListener(this)
-        mNextBtn.enable(mMobileEt,{isBtnEnable()})
-        mNextBtn.enable(mVerifyCodeEt,{isBtnEnable()})
+        mNextBtn.enable(mMobileEt, { isBtnEnable() })
+        mNextBtn.enable(mVerifyCodeEt, { isBtnEnable() })
         mHeaderBar.getLeftView().setOnClickListener(this)
 
     }
 
-    private fun isBtnEnable():Boolean{
-        return mMobileEt.text.isNullOrEmpty().not()&&
+    private fun isBtnEnable(): Boolean {
+        return mMobileEt.text.isNullOrEmpty().not() &&
                 mVerifyCodeEt.text.isNullOrEmpty().not()
     }
 }

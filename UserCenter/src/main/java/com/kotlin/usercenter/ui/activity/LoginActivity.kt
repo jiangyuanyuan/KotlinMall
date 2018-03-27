@@ -14,7 +14,7 @@ import kotlinx.android.synthetic.main.activity_login.*
 import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.toast
 
-class LoginActivity :  BaseMvpActivity<LoginPresenter>(), LoginView, View.OnClickListener {
+class LoginActivity : BaseMvpActivity<LoginPresenter>(), LoginView, View.OnClickListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,8 +23,8 @@ class LoginActivity :  BaseMvpActivity<LoginPresenter>(), LoginView, View.OnClic
     }
 
     override fun onClick(view: View) {
-        when(view.id){
-            R.id.mLoginBtn-> mPresenter.login(mMobileEt.text.toString(),mPwdEt.text.toString(),"")
+        when (view.id) {
+            R.id.mLoginBtn -> mPresenter.login(mMobileEt.text.toString(), mPwdEt.text.toString(), "")
             R.id.mLeftIv -> finish()
             R.id.mRightTv -> startActivity<RegisterActivity>()
             R.id.mForgetPwdTv -> startActivity<ForgetPwdActivity>()
@@ -33,6 +33,7 @@ class LoginActivity :  BaseMvpActivity<LoginPresenter>(), LoginView, View.OnClic
 
     override fun onLoginResult(result: UserInfo) {
         toast(result.userName)
+        startActivity<UserInfoActivity>()
     }
 
     override fun initComponent() {
@@ -42,16 +43,16 @@ class LoginActivity :  BaseMvpActivity<LoginPresenter>(), LoginView, View.OnClic
 
 
     private fun initView() {
-        mLoginBtn.enable(mMobileEt,{isBtnEnable()})
-        mLoginBtn.enable(mPwdEt,{isBtnEnable()})
+        mLoginBtn.enable(mMobileEt, { isBtnEnable() })
+        mLoginBtn.enable(mPwdEt, { isBtnEnable() })
         mLoginBtn.setOnClickListener(this)
         mForgetPwdTv.setOnClickListener(this)
         mHeaderBar.getLeftView().setOnClickListener(this)
         mHeaderBar.getRightView().setOnClickListener(this)
     }
 
-    fun isBtnEnable():Boolean{
-        return mMobileEt.text.isNullOrEmpty().not()&&
+    fun isBtnEnable(): Boolean {
+        return mMobileEt.text.isNullOrEmpty().not() &&
                 mPwdEt.text.isNullOrEmpty().not()
     }
 }

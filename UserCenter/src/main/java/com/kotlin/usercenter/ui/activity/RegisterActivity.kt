@@ -15,16 +15,19 @@ import kotlinx.android.synthetic.main.activity_register.*
 import org.jetbrains.anko.toast
 
 
-class RegisterActivity : BaseMvpActivity<RegisterPresenter>(), RegisterView ,View.OnClickListener{
+class RegisterActivity : BaseMvpActivity<RegisterPresenter>(), RegisterView, View.OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
         initView()
 
     }
+
     override fun onClick(view: View) {
-        when(view.id){
-            R.id.mRegisterBtn ->  { mPresenter.register(mMobileEt.text.toString(), mPwdEt.text.toString(), mVerifyCodeEt.text.toString()) }
+        when (view.id) {
+            R.id.mRegisterBtn -> {
+                mPresenter.register(mMobileEt.text.toString(), mPwdEt.text.toString(), mVerifyCodeEt.text.toString())
+            }
             R.id.mVerifyCodeBtn -> mVerifyCodeBtn.requestSendVerifyNumber()
             R.id.mLeftIv -> finish()
 //            else -> Log.d("点击","点击了")
@@ -44,18 +47,18 @@ class RegisterActivity : BaseMvpActivity<RegisterPresenter>(), RegisterView ,Vie
     private fun initView() {
         mVerifyCodeBtn.setOnClickListener(this)
         mRegisterBtn.setOnClickListener(this)
-        mRegisterBtn.enable(mMobileEt,{isBtnEnable()})
-        mRegisterBtn.enable(mPwdEt,{isBtnEnable()})
-        mRegisterBtn.enable(mPwdConfirmEt,{isBtnEnable()})
-        mRegisterBtn.enable(mVerifyCodeEt,{isBtnEnable()})
+        mRegisterBtn.enable(mMobileEt, { isBtnEnable() })
+        mRegisterBtn.enable(mPwdEt, { isBtnEnable() })
+        mRegisterBtn.enable(mPwdConfirmEt, { isBtnEnable() })
+        mRegisterBtn.enable(mVerifyCodeEt, { isBtnEnable() })
         mHeaderBar.getLeftView().setOnClickListener(this)
 
     }
 
-    private fun isBtnEnable():Boolean{
-        return mMobileEt.text.isNullOrEmpty().not()&&
-                mPwdEt.text.isNullOrEmpty().not()&&
-                mPwdConfirmEt.text.isNullOrEmpty().not()&&
+    private fun isBtnEnable(): Boolean {
+        return mMobileEt.text.isNullOrEmpty().not() &&
+                mPwdEt.text.isNullOrEmpty().not() &&
+                mPwdConfirmEt.text.isNullOrEmpty().not() &&
                 mVerifyCodeEt.text.isNullOrEmpty().not()
     }
 }
