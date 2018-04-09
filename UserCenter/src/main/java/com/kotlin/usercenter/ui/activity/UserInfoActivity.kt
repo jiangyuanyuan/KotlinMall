@@ -27,13 +27,22 @@ import java.io.File
 import android.Manifest.permission
 import android.Manifest.permission.WRITE_EXTERNAL_STORAGE
 import android.os.Build
-
-
+import com.kotlin.base.common.BaseConstant
+import com.kotlin.base.utils.GlideUtils
+import com.qiniu.android.http.ResponseInfo
+import com.qiniu.android.storage.UpCompletionHandler
+import com.qiniu.android.storage.UploadManager
+import org.json.JSONObject
 
 
 class UserInfoActivity : BaseMvpActivity<UserInfoPresenter>(), UserInfoView , TakePhoto.TakeResultListener {
+
+
     private lateinit var mTakePhoto: TakePhoto
     private lateinit var mTempFile :File
+    private val mUploadManager:UploadManager by lazy { UploadManager() }
+    private var mLocalFileUrl:String? = null
+    private var mRemoteFileUrl:String? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user_info)
@@ -78,14 +87,26 @@ class UserInfoActivity : BaseMvpActivity<UserInfoPresenter>(), UserInfoView , Ta
     override fun takeSuccess(result: TResult?) {
         Log.d("拍照",result?.image?.originalPath)
         Log.d("拍照",result?.image?.compressPath)
+        mLocalFileUrl = result?.image?.compressPath
+        mPresenter.getUploadToken()
     }
 
     override fun takeCancel() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     override fun takeFail(result: TResult?, msg: String?) {
         Log.d("拍照",msg)
+    }
+    override fun onGetUploadTokenResult(result: String) {
+        mUploadManager.put(mLocalFileUrl,null,result,object: UpCompletionHandler {
+            override fun complete(key: String?, info: ResponseInfo?, response: JSONObject?) {
+                mRemoteFileUrl = BaseConstant.IMAGE_SERVER_ADDRESS + response?.get("hash")
+
+                Log.d("test", mRemoteFileUrl)
+                GlideUtils.loadUrlImage(this@UserInfoActivity, mRemoteFileUrl!!,mUserIconIv)
+            }
+
+        },null)
     }
 
     fun createTempFile(){

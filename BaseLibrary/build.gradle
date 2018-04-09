@@ -74,6 +74,8 @@ dependencies {
     compile "com.jph.takephoto:takephoto_library:${take_photo_version}"
     //Alert View
     compile "com.bigkoo:alertview:${alert_view_version}"
+    //七牛
+    compile 'com.qiniu:qiniu-android-sdk:7.3.+'
 }
 repositories {
     mavenCentral()
