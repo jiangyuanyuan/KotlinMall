@@ -3,6 +3,7 @@ package com.kotlin.usercenter.presenter
 import com.kotlin.base.ext.execute
 import com.kotlin.base.presenter.BasePresenter
 import com.kotlin.base.rx.BaseSubscriber
+import com.kotlin.usercenter.data.protocol.UserInfo
 import com.kotlin.usercenter.presenter.view.UserInfoView
 import com.kotlin.usercenter.service.UploadService
 import com.kotlin.usercenter.service.UserService
@@ -28,6 +29,18 @@ class UserInfoPresenter @Inject constructor(): BasePresenter<UserInfoView>() {
             override fun onNext(t: String) {
                 super.onNext(t)
                 mView.onGetUploadTokenResult(t)
+            }
+        },lifecycleProvider)
+    }
+
+    fun editUser(mUserIcon: String, mUserName: String, mUserGender: String, mUserSign: String) {
+        if (!checkNetWork())
+            return
+        mView.showLoading()
+        userService.editUser(mUserIcon,mUserName,mUserGender,mUserSign).execute(object :BaseSubscriber<UserInfo>(mView){
+            override fun onNext(t: UserInfo) {
+                super.onNext(t)
+                mView.onEditUserResult(t)
             }
         },lifecycleProvider)
     }

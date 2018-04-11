@@ -11,4 +11,5 @@ interface UserService {
     fun login(mobile: String, pwd: String, pushId: String): Observable<UserInfo>
     fun forgetPwd(mobile: String,verifyCode: String): Observable<Boolean>
     fun resetPwd(mobile: String,pwd: String): Observable<Boolean>
+    fun editUser(mUserIcon: String, mUserName: String, mUserGender: String, mUserSign: String): Observable<UserInfo>
 }
