@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import com.kotlin.base.ext.enable
 import com.kotlin.base.ui.activity.BaseMvpActivity
+import com.kotlin.user.utils.UserPrefsUtils
 import com.kotlin.usercenter.R
 import com.kotlin.usercenter.data.protocol.UserInfo
 import com.kotlin.usercenter.di.component.DaggerUserComponent
@@ -33,6 +34,7 @@ class LoginActivity : BaseMvpActivity<LoginPresenter>(), LoginView, View.OnClick
 
     override fun onLoginResult(result: UserInfo) {
         toast(result.userName)
+        UserPrefsUtils.putUserInfo(result)
         startActivity<UserInfoActivity>()
     }
 
