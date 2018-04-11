@@ -76,6 +76,10 @@ dependencies {
     compile "com.bigkoo:alertview:${alert_view_version}"
     //七牛
     compile 'com.qiniu:qiniu-android-sdk:7.3.+'
+    //底部导航
+    compile 'com.ashokvarma.android:bottom-navigation-bar:2.0.2'
+
+
 }
 repositories {
     mavenCentral()
