@@ -1,4 +1,4 @@
-package com.kotlin.base.ui.activity
+package com.kotlin.base.ui.fragment
 
 import com.trello.rxlifecycle.components.support.RxFragment
 
