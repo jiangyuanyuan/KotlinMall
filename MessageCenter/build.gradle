@@ -1,34 +1,40 @@
-apply plugin: 'com.android.application'
+apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-android-extensions'
+
 android {
     compileSdkVersion 26
+
+
+
     defaultConfig {
-        applicationId "com.kotlin.mall"
         minSdkVersion 15
         targetSdkVersion 26
         versionCode 1
         versionName "1.0"
+
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
     }
+
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
-    compile project(path: ':BaseLibrary')
-    compile project(path: ':Provider')
-    compile project(path: ':MessageCenter')
-    if (isUserModule.toBoolean()){
-        implementation project(':UserCenter')
-    }
-}
-repositories {
-    mavenCentral()
+
+    implementation project(path: ':BaseLibrary')
+    implementation project(path: ':Provider')
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+
+    //Dagger2
+    implementation "com.google.dagger:dagger:$dagger_version"
+    kapt "com.google.dagger:dagger-compiler:$dagger_version"
 }

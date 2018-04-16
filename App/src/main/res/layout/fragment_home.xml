@@ -19,13 +19,13 @@
             android:id="@+id/mHomeBanner"
             android:layout_width="match_parent"
             android:layout_height="150dp"/>
-    <!--<com.kotlin.message.widgets.NewsFlipperView-->
-            <!--android:id="@+id/mNewsFlipperView"-->
-            <!--style="@style/MatchWrap"-->
-            <!--android:layout_marginLeft="@dimen/common_margin_middle"-->
-            <!--android:layout_marginTop="@dimen/common_margin_small"-->
-            <!--android:layout_marginRight="@dimen/common_margin_middle"-->
-            <!--android:layout_marginBottom="@dimen/common_margin_small"/>-->
+    <com.kotlin.message.widgets.NewsFlipperView
+            android:id="@+id/mNewsFlipperView"
+            style="@style/MatchWrap"
+            android:layout_marginLeft="@dimen/common_margin_middle"
+            android:layout_marginTop="@dimen/common_margin_small"
+            android:layout_marginRight="@dimen/common_margin_middle"
+            android:layout_marginBottom="@dimen/common_margin_small"/>
     <TextView
             android:textSize="@dimen/text_small_size"
             android:textStyle="bold"

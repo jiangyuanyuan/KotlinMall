@@ -80,6 +80,8 @@ dependencies {
     compile 'com.ashokvarma.android:bottom-navigation-bar:2.0.2'
     //Banner
     compile 'com.youth.banner:banner:1.4.10'
+    //标签
+    implementation 'com.github.shts:TriangleLabelView:1.1.2'
 
 
 }
