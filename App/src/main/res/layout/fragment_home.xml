@@ -46,15 +46,15 @@
             android:paddingRight="@dimen/common_padding"
             android:paddingBottom="@dimen/common_padding_small"
             android:layout_height="wrap_content"/>
-    <!--<me.crosswall.lib.coverflow.core.PagerContainer-->
-            <!--android:id="@+id/mTopicContainer"-->
-            <!--style="@style/MatchMatch"-->
-            <!--android:background="@drawable/home_container_bg">-->
-        <!--<android.support.v4.view.ViewPager-->
-                <!--android:id="@+id/mTopicPager"-->
-                <!--android:layout_gravity="center"-->
-                <!--android:layout_width="200.0dip"-->
-                <!--android:layout_height="160.0dip"-->
-                <!--android:overScrollMode="never"/>-->
-    <!--</me.crosswall.lib.coverflow.core.PagerContainer>-->
+    <me.crosswall.lib.coverflow.core.PagerContainer
+            android:id="@+id/mTopicContainer"
+            style="@style/MatchMatch"
+            android:background="@drawable/home_container_bg">
+        <android.support.v4.view.ViewPager
+                android:id="@+id/mTopicPager"
+                android:layout_gravity="center"
+                android:layout_width="200.0dip"
+                android:layout_height="160.0dip"
+                android:overScrollMode="never"/>
+    </me.crosswall.lib.coverflow.core.PagerContainer>
 </LinearLayout>
