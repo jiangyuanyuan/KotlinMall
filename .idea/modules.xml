@@ -3,16 +3,11 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/App/App.iml" filepath="$PROJECT_DIR$/App/App.iml" />
-      <module fileurl="file://$PROJECT_DIR$/App/App.iml" filepath="$PROJECT_DIR$/App/App.iml" />
-      <module fileurl="file://$PROJECT_DIR$/BaseLibrary/BaseLibrary.iml" filepath="$PROJECT_DIR$/BaseLibrary/BaseLibrary.iml" />
       <module fileurl="file://$PROJECT_DIR$/BaseLibrary/BaseLibrary.iml" filepath="$PROJECT_DIR$/BaseLibrary/BaseLibrary.iml" />
       <module fileurl="file://$PROJECT_DIR$/KTMall.iml" filepath="$PROJECT_DIR$/KTMall.iml" />
       <module fileurl="file://$PROJECT_DIR$/KotlinMall.iml" filepath="$PROJECT_DIR$/KotlinMall.iml" />
       <module fileurl="file://$PROJECT_DIR$/MessageCenter/MessageCenter.iml" filepath="$PROJECT_DIR$/MessageCenter/MessageCenter.iml" />
-      <module fileurl="file://$PROJECT_DIR$/MessageCenter/MessageCenter.iml" filepath="$PROJECT_DIR$/MessageCenter/MessageCenter.iml" />
       <module fileurl="file://$PROJECT_DIR$/Provider/Provider.iml" filepath="$PROJECT_DIR$/Provider/Provider.iml" />
-      <module fileurl="file://$PROJECT_DIR$/Provider/Provider.iml" filepath="$PROJECT_DIR$/Provider/Provider.iml" />
-      <module fileurl="file://$PROJECT_DIR$/UserCenter/UserCenter.iml" filepath="$PROJECT_DIR$/UserCenter/UserCenter.iml" />
       <module fileurl="file://$PROJECT_DIR$/UserCenter/UserCenter.iml" filepath="$PROJECT_DIR$/UserCenter/UserCenter.iml" />
     </modules>
   </component>

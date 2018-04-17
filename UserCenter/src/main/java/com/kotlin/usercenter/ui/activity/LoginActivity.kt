@@ -13,7 +13,6 @@ import com.kotlin.usercenter.presenter.LoginPresenter
 import com.kotlin.usercenter.presenter.view.LoginView
 import kotlinx.android.synthetic.main.activity_login.*
 import org.jetbrains.anko.startActivity
-import org.jetbrains.anko.toast
 
 class LoginActivity : BaseMvpActivity<LoginPresenter>(), LoginView, View.OnClickListener {
 
@@ -33,9 +32,8 @@ class LoginActivity : BaseMvpActivity<LoginPresenter>(), LoginView, View.OnClick
     }
 
     override fun onLoginResult(result: UserInfo) {
-        toast(result.userName)
         UserPrefsUtils.putUserInfo(result)
-        startActivity<UserInfoActivity>()
+        finish()
     }
 
     override fun initComponent() {

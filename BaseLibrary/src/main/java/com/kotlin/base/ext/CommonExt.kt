@@ -4,6 +4,7 @@ import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
+import com.ashokvarma.bottomnavigation.BottomNavigationBar
 import com.kotlin.base.rx.BaseSubscriber
 import com.kotlin.base.utils.GlideUtils
 import com.kotlin.base.widgets.DefaultTextWatcher
@@ -38,4 +39,19 @@ fun Button.enable(editText: EditText, method :()-> Boolean){
 
 fun ImageView.loadUrl(url:String){
     GlideUtils.loadUrlImage(context,url,this)
+}
+
+fun BottomNavigationBar.slectChange(method: (i:Int) -> Unit){
+    this.setTabSelectedListener(object : BottomNavigationBar.OnTabSelectedListener{
+        override fun onTabReselected(position: Int) {
+        }
+
+        override fun onTabUnselected(position: Int) {
+        }
+
+        override fun onTabSelected(position: Int) {
+            method(position)
+        }
+
+    })
 }
