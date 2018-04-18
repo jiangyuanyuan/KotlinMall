@@ -1,5 +1,6 @@
 package com.kotlin.goods.ui.fragment
 
+import android.graphics.drawable.AnimationDrawable
 import android.os.Bundle
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.LinearLayoutManager
@@ -7,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.kennyc.view.MultiStateView
+import com.kotlin.base.ext.startLoading
 import com.kotlin.base.ui.adapter.BaseRecyclerViewAdapter
 import com.kotlin.base.ui.fragment.BaseFragment
 import com.kotlin.base.ui.fragment.BaseMvpFragment
@@ -19,6 +21,7 @@ import com.kotlin.goods.presenter.view.CategoryView
 import com.kotlin.goods.ui.adapter.SecondCategoryAdapter
 import com.kotlin.goods.ui.adapter.TopCategoryAdapter
 import kotlinx.android.synthetic.main.fragment_category.*
+import org.jetbrains.anko.find
 import org.jetbrains.anko.support.v4.toast
 
 class CategoryFragment :BaseMvpFragment<CategoryPresenter>(),CategoryView{
@@ -41,8 +44,6 @@ class CategoryFragment :BaseMvpFragment<CategoryPresenter>(),CategoryView{
         initView()
         loadData()
     }
-
-
 
     private fun initView() {
         mTopCategoryRv.layoutManager = LinearLayoutManager(context)
@@ -68,10 +69,13 @@ class CategoryFragment :BaseMvpFragment<CategoryPresenter>(),CategoryView{
         })
     }
     private fun loadData(parentId :Int =0) {
+        if (parentId !=0){
+            mMultiStateView.startLoading()
+        }
         mPresenter.getCategory(parentId)
     }
     override fun onCategoryResult(result: MutableList<Category>?) {
-        result?.let {
+        if (result !=null &&result.size>0){
             if (result[0].parentId==0){
                 result[0].isSelected = true
                 topCategoryAdapter.setData(result)
@@ -80,6 +84,12 @@ class CategoryFragment :BaseMvpFragment<CategoryPresenter>(),CategoryView{
                 secondCategoryAdapter.setData(result)
                 mMultiStateView.viewState = MultiStateView.VIEW_STATE_CONTENT
             }
+            mTopCategoryIv.visibility = View.VISIBLE
+            mCategoryTitleTv.visibility = View.VISIBLE
+        }else{
+            mTopCategoryIv.visibility = View.GONE
+            mCategoryTitleTv.visibility = View.GONE
+            mMultiStateView.viewState = MultiStateView.VIEW_STATE_EMPTY
         }
     }
 }
