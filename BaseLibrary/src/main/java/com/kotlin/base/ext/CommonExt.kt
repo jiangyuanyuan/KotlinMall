@@ -5,6 +5,9 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import com.ashokvarma.bottomnavigation.BottomNavigationBar
+import com.kotlin.base.data.protocol.BaseResp
+import com.kotlin.base.rx.BaseFun
+import com.kotlin.base.rx.BaseFunBoolean
 import com.kotlin.base.rx.BaseSubscriber
 import com.kotlin.base.utils.GlideUtils
 import com.kotlin.base.widgets.DefaultTextWatcher
@@ -21,6 +24,20 @@ fun <T> Observable<T>.execute(subscriber: BaseSubscriber<T>,activity: LifecycleP
             .compose(activity.bindToLifecycle())
             .subscribeOn(Schedulers.io())
             .subscribe(subscriber)
+}
+
+/*
+    扩展数据转换
+ */
+fun <T> Observable<BaseResp<T>>.convert():Observable<T>{
+    return this.flatMap(BaseFun())
+}
+
+/*
+    扩展Boolean类型数据转换
+ */
+fun <T> Observable<BaseResp<T>>.convertBoolean():Observable<Boolean>{
+    return this.flatMap(BaseFunBoolean())
 }
 
 fun View.onClick(method:() ->Unit){

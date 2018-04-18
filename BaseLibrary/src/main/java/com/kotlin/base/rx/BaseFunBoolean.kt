@@ -8,8 +8,8 @@ import rx.functions.Func1
 /**
  * Created by jiangyuanyuan on 26/3/18.
  */
-class BaseFunBoolean : Func1<BaseResp<String>, Observable<Boolean>> {
-    override fun call(t: BaseResp<String>): Observable<Boolean> {
+class BaseFunBoolean<T> : Func1<BaseResp<T>, Observable<Boolean>> {
+    override fun call(t: BaseResp<T>): Observable<Boolean> {
         if (t.status != 0) {
             return Observable.error(BaseException(t.status, t.message))
         }
