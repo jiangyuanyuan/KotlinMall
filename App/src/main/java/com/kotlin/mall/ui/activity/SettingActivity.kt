@@ -19,6 +19,5 @@ class SettingActivity : BaseActivity() {
             UserPrefsUtils.putUserInfo(null)
             finish()
         }
-
     }
 }
