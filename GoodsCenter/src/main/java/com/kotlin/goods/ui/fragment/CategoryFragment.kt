@@ -18,10 +18,12 @@ import com.kotlin.goods.di.component.DaggerCategoryComponent
 import com.kotlin.goods.di.module.CategoryModule
 import com.kotlin.goods.presenter.CategoryPresenter
 import com.kotlin.goods.presenter.view.CategoryView
+import com.kotlin.goods.ui.activity.GoodsActivity
 import com.kotlin.goods.ui.adapter.SecondCategoryAdapter
 import com.kotlin.goods.ui.adapter.TopCategoryAdapter
 import kotlinx.android.synthetic.main.fragment_category.*
 import org.jetbrains.anko.find
+import org.jetbrains.anko.support.v4.startActivity
 import org.jetbrains.anko.support.v4.toast
 
 class CategoryFragment :BaseMvpFragment<CategoryPresenter>(),CategoryView{
@@ -65,6 +67,7 @@ class CategoryFragment :BaseMvpFragment<CategoryPresenter>(),CategoryView{
         secondCategoryAdapter.setOnItemClickListener(object : BaseRecyclerViewAdapter.OnItemClickListener<Category>{
             override fun onItemClick(item: Category, position: Int) {
                 toast("跳转")
+                startActivity<GoodsActivity>()
             }
         })
     }
