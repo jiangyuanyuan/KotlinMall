@@ -21,4 +21,14 @@ class GoodsPresenter @Inject constructor() : BasePresenter<GoodsListView>(){
             }
         },lifecycleProvider)
     }
+
+    fun getGoodsListByKeyword(keyWord: String, pageNo: Int){
+        if (!checkNetWork()){return}
+        goodsService.getGoodsListByKeyword(keyWord,pageNo).execute(object: BaseSubscriber<MutableList<Goods>?>(mView){
+            override fun onNext(t: MutableList<Goods>?) {
+                super.onNext(t)
+                mView.onGoodsListResult(t)
+            }
+        },lifecycleProvider)
+    }
 }

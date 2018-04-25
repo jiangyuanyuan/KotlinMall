@@ -10,6 +10,7 @@ import com.kotlin.base.BaseApplication.Companion.context
 import com.kotlin.base.ext.startLoading
 import com.kotlin.base.ui.activity.BaseMvpActivity
 import com.kotlin.goods.R
+import com.kotlin.goods.common.GoodsConstant
 import com.kotlin.goods.data.protocol.Goods
 import com.kotlin.goods.di.component.DaggerGoodsComponent
 import com.kotlin.goods.di.module.GoodsModule
@@ -17,6 +18,7 @@ import com.kotlin.goods.presenter.GoodsPresenter
 import com.kotlin.goods.presenter.view.GoodsListView
 import com.kotlin.goods.ui.adapter.GoodsAdapter
 import kotlinx.android.synthetic.main.activity_goods.*
+import kotlinx.android.synthetic.main.activity_search_goods.*
 
 class GoodsActivity : BaseMvpActivity<GoodsPresenter>(),GoodsListView,BGARefreshLayout.BGARefreshLayoutDelegate{
 
@@ -35,6 +37,10 @@ class GoodsActivity : BaseMvpActivity<GoodsPresenter>(),GoodsListView,BGARefresh
         setContentView(R.layout.activity_goods)
         initView()
         initRefreshLayout()
+    }
+
+    override fun onStart() {
+        super.onStart()
         loadData()
     }
 
@@ -47,8 +53,11 @@ class GoodsActivity : BaseMvpActivity<GoodsPresenter>(),GoodsListView,BGARefresh
     }
     private fun loadData() {
         mMultiStateView.startLoading()
-        mPresenter.getGoodsList(intent.getIntExtra("categoryId",1),1)
-
+        if (intent.getIntExtra(GoodsConstant.KEY_SEARCH_GOODS_TYPE,0)==0){
+            mPresenter.getGoodsList(intent.getIntExtra(GoodsConstant.CATEGORYID,1),1)
+        }else {
+            mPresenter.getGoodsListByKeyword(intent.getStringExtra(GoodsConstant.KEY_GOODS_KEYWORD),mCurrentPage)
+        }
     }
 
     override fun onGoodsListResult(result: MutableList<Goods>?) {

@@ -59,7 +59,7 @@ class HeaderBar @JvmOverloads constructor(
         }
 
         //返回图标默认实现（关闭Activity）
-        mLeftIv.onClick {
+        mLeftIv.setOnClickListener {
             if (context is Activity){
                 (context as Activity).finish()
             }

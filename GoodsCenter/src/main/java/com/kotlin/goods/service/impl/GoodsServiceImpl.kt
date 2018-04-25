@@ -14,4 +14,8 @@ class GoodsServiceImpl @Inject constructor():GoodsService {
     override fun getGoodsList(categoryId: Int, pageNo: Int): Observable<MutableList<Goods>?> {
         return goodsRepository.getGoodsList(categoryId,pageNo).convert()
     }
+
+    override fun getGoodsListByKeyword(keyWord: String, pageNo: Int): Observable<MutableList<Goods>?> {
+        return goodsRepository.getGoodsListByKeyword(keyWord,pageNo).convert()
+    }
 }

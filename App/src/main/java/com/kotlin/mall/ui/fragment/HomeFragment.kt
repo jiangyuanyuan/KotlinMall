@@ -8,6 +8,9 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import com.kotlin.base.ui.fragment.BaseFragment
 import com.kotlin.base.widgets.BannerImageLoader
+import com.kotlin.goods.common.GoodsConstant
+import com.kotlin.goods.ui.activity.GoodsActivity
+import com.kotlin.goods.ui.activity.SearchGoodsActivity
 import com.kotlin.mall.R
 import com.kotlin.mall.common.*
 import com.kotlin.mall.ui.adapter.HomeDiscountAdapter
@@ -15,6 +18,7 @@ import com.kotlin.mall.ui.adapter.TopicAdapter
 import com.youth.banner.BannerConfig
 import com.youth.banner.Transformer
 import kotlinx.android.synthetic.main.fragment_home.*
+import org.jetbrains.anko.support.v4.startActivity
 
 class HomeFragment : BaseFragment() {
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -23,10 +27,16 @@ class HomeFragment : BaseFragment() {
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initView()
         initBanner()
         initNews()
         initDiscount()
         initTopic()
+    }
+
+    private fun initView() {
+        mSearchEt.setOnClickListener {
+            startActivity<SearchGoodsActivity>() }
     }
 
 
