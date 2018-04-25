@@ -5,7 +5,7 @@ buildscript {
     ext.kotlin_version ='1.2.30'
     ext.anko_version='0.10.4'
 
-    ext.kotlin_version = '1.1.50'
+
     ext.anko_version = '0.10.1'
     ext.ok_http_version = '3.4.1'
     ext.retrofit_version = '2.4.0'
