@@ -4,11 +4,11 @@ import com.kotlin.base.ext.execute
 import com.kotlin.base.presenter.BasePresenter
 import com.kotlin.base.rx.BaseSubscriber
 import com.kotlin.goods.data.protocol.Goods
-import com.kotlin.goods.presenter.view.GoodsView
+import com.kotlin.goods.presenter.view.GoodsListView
 import com.kotlin.goods.service.GoodsService
 import javax.inject.Inject
 
-class GoodsPresenter @Inject constructor() : BasePresenter<GoodsView>(){
+class GoodsPresenter @Inject constructor() : BasePresenter<GoodsListView>(){
     @Inject
     lateinit var goodsService: GoodsService
 
@@ -17,7 +17,7 @@ class GoodsPresenter @Inject constructor() : BasePresenter<GoodsView>(){
         goodsService.getGoodsList(categoryId,pageNo).execute(object: BaseSubscriber<MutableList<Goods>?>(mView){
             override fun onNext(t: MutableList<Goods>?) {
                 super.onNext(t)
-                mView.onGoodsResult(t)
+                mView.onGoodsListResult(t)
             }
         },lifecycleProvider)
     }

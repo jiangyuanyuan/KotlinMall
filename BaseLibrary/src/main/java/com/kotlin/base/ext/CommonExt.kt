@@ -68,3 +68,7 @@ fun MultiStateView.startLoading(){
     val animBackground = loadingView!!.find<View>(R.id.loading_anim_view).background
     (animBackground as AnimationDrawable).start()
 }
+
+fun View.setVisible(boolean: Boolean){
+    if (boolean) this.visibility = View.VISIBLE else this.visibility = View.GONE
+}

@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.kennyc.view.MultiStateView
+import com.kotlin.base.ext.setVisible
 import com.kotlin.base.ext.startLoading
 import com.kotlin.base.ui.adapter.BaseRecyclerViewAdapter
 import com.kotlin.base.ui.fragment.BaseFragment
@@ -67,7 +68,7 @@ class CategoryFragment :BaseMvpFragment<CategoryPresenter>(),CategoryView{
         secondCategoryAdapter.setOnItemClickListener(object : BaseRecyclerViewAdapter.OnItemClickListener<Category>{
             override fun onItemClick(item: Category, position: Int) {
                 toast("跳转")
-                startActivity<GoodsActivity>()
+                startActivity<GoodsActivity>("categoryId" to item.id)
             }
         })
     }
@@ -87,11 +88,11 @@ class CategoryFragment :BaseMvpFragment<CategoryPresenter>(),CategoryView{
                 secondCategoryAdapter.setData(result)
                 mMultiStateView.viewState = MultiStateView.VIEW_STATE_CONTENT
             }
-            mTopCategoryIv.visibility = View.VISIBLE
-            mCategoryTitleTv.visibility = View.VISIBLE
+            mTopCategoryIv.setVisible(true)
+            mCategoryTitleTv.setVisible(true)
         }else{
-            mTopCategoryIv.visibility = View.GONE
-            mCategoryTitleTv.visibility = View.GONE
+            mTopCategoryIv.setVisible(false)
+            mCategoryTitleTv.setVisible(false)
             mMultiStateView.viewState = MultiStateView.VIEW_STATE_EMPTY
         }
     }
