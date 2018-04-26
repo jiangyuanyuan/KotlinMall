@@ -96,6 +96,15 @@ dependencies {
     compile "com.github.Kennyc1012:MultiStateView:$multi_state_view_version"
     //上下拉刷新
     compile 'cn.bingoogolapple:bga-refreshlayout:1.1.7@aar'
+
+    //Kotlin Bus
+    compile 'com.eightbitlab:rxbus:1.0.2'
+    //FlowLayout
+    compile 'com.zhy:flowlayout-lib:1.0.3'
+    //ARouter
+    compile "com.alibaba:arouter-api:$arouter_api_version"
+    //BadgeView
+    compile 'q.rorbin:badgeview:1.1.2'
 }
 repositories {
     mavenCentral()

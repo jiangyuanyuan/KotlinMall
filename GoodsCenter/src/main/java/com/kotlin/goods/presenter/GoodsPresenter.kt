@@ -6,6 +6,7 @@ import com.kotlin.base.rx.BaseSubscriber
 import com.kotlin.goods.data.protocol.Goods
 import com.kotlin.goods.presenter.view.GoodsListView
 import com.kotlin.goods.service.GoodsService
+import rx.Observable
 import javax.inject.Inject
 
 class GoodsPresenter @Inject constructor() : BasePresenter<GoodsListView>(){
@@ -31,4 +32,6 @@ class GoodsPresenter @Inject constructor() : BasePresenter<GoodsListView>(){
             }
         },lifecycleProvider)
     }
+
+
 }

@@ -8,6 +8,8 @@ import rx.Observable
 import javax.inject.Inject
 
 class GoodsServiceImpl @Inject constructor():GoodsService {
+
+
     @Inject
     lateinit var goodsRepository: GoodsRepository
 
@@ -18,4 +20,9 @@ class GoodsServiceImpl @Inject constructor():GoodsService {
     override fun getGoodsListByKeyword(keyWord: String, pageNo: Int): Observable<MutableList<Goods>?> {
         return goodsRepository.getGoodsListByKeyword(keyWord,pageNo).convert()
     }
+
+    override fun getGoodsDetail(goodsId: Int): Observable<Goods> {
+        return goodsRepository.getGoodsDetail(goodsId).convert()
+    }
+
 }

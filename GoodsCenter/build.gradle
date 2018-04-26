@@ -36,5 +36,6 @@ dependencies {
 
     //Dagger2
     implementation "com.google.dagger:dagger:$dagger_version"
+    implementation 'com.android.support.constraint:constraint-layout:1.1.0'
     kapt "com.google.dagger:dagger-compiler:$dagger_version"
 }
