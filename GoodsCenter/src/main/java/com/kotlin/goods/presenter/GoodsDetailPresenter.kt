@@ -4,6 +4,8 @@ import com.kotlin.base.ext.convert
 import com.kotlin.base.ext.execute
 import com.kotlin.base.presenter.BasePresenter
 import com.kotlin.base.rx.BaseSubscriber
+import com.kotlin.base.utils.AppPrefsUtils
+import com.kotlin.goods.common.GoodsConstant
 import com.kotlin.goods.data.protocol.Goods
 import com.kotlin.goods.presenter.view.GoodsDetailView
 import com.kotlin.goods.presenter.view.GoodsListView
@@ -36,6 +38,7 @@ class GoodsDetailPresenter @Inject constructor() : BasePresenter<GoodsDetailView
                 goodsCount,goodsSku).execute(object :BaseSubscriber<Int>(mView){
              override fun onNext(t: Int) {
                 super.onNext(t)
+                 AppPrefsUtils.putInt(GoodsConstant.SP_CART_SIZE,t)
                  mView.onAddCartResult(t)
             }
         },lifecycleProvider)

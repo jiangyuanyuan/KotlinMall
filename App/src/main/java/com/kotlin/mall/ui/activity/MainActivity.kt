@@ -3,7 +3,13 @@ package com.kotlin.mall.ui.activity
 import android.support.v4.app.Fragment
 import android.os.Bundle
 import com.ashokvarma.bottomnavigation.BottomNavigationBar
+import com.eightbitlab.rxbus.Bus
+import com.eightbitlab.rxbus.registerInBus
 import com.kotlin.base.ui.activity.BaseActivity
+import com.kotlin.base.utils.AppPrefsUtils
+import com.kotlin.goods.common.GoodsConstant
+import com.kotlin.goods.event.UpdataCartSizeEvent
+import com.kotlin.goods.ui.fragment.CartFragment
 import com.kotlin.goods.ui.fragment.CategoryFragment
 
 import com.kotlin.mall.R
@@ -16,18 +22,23 @@ class MainActivity : BaseActivity() {
     private val mStack = Stack<Fragment>()
     private val mHomeFragment by lazy { HomeFragment() }
     private val mCategoryFragment by lazy { CategoryFragment() }
-    private val mCartFragment by lazy { HomeFragment() }
+    private val mCartFragment by lazy { CartFragment() }
     private val mMsgFragment by lazy { HomeFragment() }
     private val mMeFragment by lazy { MeFragment() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        mBottomNavBar.checkMsgBadge(false)
-        mBottomNavBar.checkCartBadge(20)
         initFragment()
         initBottomNavBar()
         changFragment(0)
+        initObserve()
+        loadCartSize()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Bus.unregister(this)
     }
 
     private fun initFragment() {
@@ -60,7 +71,6 @@ class MainActivity : BaseActivity() {
             }
 
         })
-//        mBottomNavBar.slectChange { changFragment(1) }
     }
 
     private fun changFragment(position: Int) {
@@ -71,5 +81,13 @@ class MainActivity : BaseActivity() {
         manager.show(mStack[position])
         manager.commit()
 
+    }
+    private fun initObserve() {
+        Bus.observe<UpdataCartSizeEvent>().subscribe{
+            loadCartSize()
+        }.registerInBus(this)
+    }
+    private fun loadCartSize(){
+        mBottomNavBar.checkCartBadge(AppPrefsUtils.getInt(GoodsConstant.SP_CART_SIZE))
     }
 }
