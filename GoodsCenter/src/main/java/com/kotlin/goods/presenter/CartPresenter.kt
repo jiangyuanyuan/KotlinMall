@@ -30,4 +30,29 @@ class CartPresenter @Inject constructor(): BasePresenter<CartView>(){
 
                 },lifecycleProvider)
     }
+
+    fun deleteCartList(list: List<Int>) {
+        if (!checkNetWork()){
+            return
+        }
+        cartServiceImpl.deleteCartList(list)
+                .execute(object : BaseSubscriber<Boolean>(mView) {
+                    override fun onNext(t: Boolean) {
+                        mView.onDeleteCartListResult(t)
+                    }
+                },lifecycleProvider)
+    }
+
+    fun submitCart(list: MutableList<CartGoods>, totalPrice: Long){
+        if (!checkNetWork()){
+            return
+        }
+        cartServiceImpl.submitCart(list,totalPrice).execute(object :BaseSubscriber<Int>(mView){
+            override fun onNext(t: Int) {
+                super.onNext(t)
+                mView.onSubmitCartResult(t)
+            }
+        },lifecycleProvider)
+    }
+
 }

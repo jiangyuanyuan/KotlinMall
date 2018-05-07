@@ -9,4 +9,6 @@ import com.kotlin.goods.data.protocol.Category
  */
 interface CartView :BaseView{
     fun onGetCartListResult(result: MutableList<CartGoods>?)
+    fun onDeleteCartListResult(result: Boolean)
+    fun onSubmitCartResult(result: Int)
 }

@@ -14,6 +14,7 @@ import com.kotlin.goods.event.AddCartEvent
 import com.kotlin.goods.event.UpdataCartSizeEvent
 import com.kotlin.goods.ui.adapter.GoodsDetailVpAdapter
 import kotlinx.android.synthetic.main.activity_goods_detail.*
+import org.jetbrains.anko.startActivity
 import q.rorbin.badgeview.QBadgeView
 
 class GoodsDetailActivity : BaseActivity() {
@@ -47,6 +48,10 @@ class GoodsDetailActivity : BaseActivity() {
             }
         }
         mCartBage = QBadgeView(this)
+        mEnterCartTv.setOnClickListener {
+            startActivity<CartActivity>()
+        }
+        mLeftIv.setOnClickListener { finish() }
     }
 
     private fun initObserve() {
