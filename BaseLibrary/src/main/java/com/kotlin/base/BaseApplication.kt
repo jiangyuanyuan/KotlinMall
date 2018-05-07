@@ -2,6 +2,7 @@ package com.kotlin.base
 
 import android.app.Application
 import android.content.Context
+import com.alibaba.android.arouter.launcher.ARouter
 import com.kotlin.base.di.component.AppComponent
 import com.kotlin.base.di.component.DaggerAppComponent
 import com.kotlin.base.di.module.AppModule
@@ -16,6 +17,9 @@ open class BaseApplication : Application() {
         super.onCreate()
         initAppInject()
         context = this
+        ARouter.openLog()
+        ARouter.openDebug()
+        ARouter.init(this)
     }
 
     private fun initAppInject() {

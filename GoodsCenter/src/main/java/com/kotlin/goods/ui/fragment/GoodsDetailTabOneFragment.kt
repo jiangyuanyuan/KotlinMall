@@ -11,40 +11,29 @@ import android.view.animation.Animation
 import android.view.animation.ScaleAnimation
 import com.eightbitlab.rxbus.Bus
 import com.eightbitlab.rxbus.registerInBus
-import com.kennyc.view.MultiStateView
-import com.kotlin.base.ext.setVisible
-import com.kotlin.base.ext.startLoading
 import com.kotlin.base.ui.activity.BaseActivity
-import com.kotlin.base.ui.adapter.BaseRecyclerViewAdapter
-import com.kotlin.base.ui.fragment.BaseFragment
 import com.kotlin.base.ui.fragment.BaseMvpFragment
 import com.kotlin.base.utils.YuanFenConverter
 import com.kotlin.goods.R
 import com.kotlin.goods.common.GoodsConstant
-import com.kotlin.goods.data.protocol.Category
 import com.kotlin.goods.data.protocol.Goods
-import com.kotlin.goods.di.component.DaggerCategoryComponent
 import com.kotlin.goods.di.component.DaggerGoodsComponent
-import com.kotlin.goods.di.module.CategoryModule
 import com.kotlin.goods.di.module.GoodsModule
+import com.kotlin.goods.event.AddCartEvent
 import com.kotlin.goods.event.GoodsDetailImageEvent
 import com.kotlin.goods.event.SkuChangedEvent
-import com.kotlin.goods.presenter.CategoryPresenter
 import com.kotlin.goods.presenter.GoodsDetailPresenter
-import com.kotlin.goods.presenter.view.CategoryView
 import com.kotlin.goods.presenter.view.GoodsDetailView
-import com.kotlin.goods.ui.activity.GoodsActivity
-import com.kotlin.goods.ui.adapter.SecondCategoryAdapter
-import com.kotlin.goods.ui.adapter.TopCategoryAdapter
 import com.kotlin.goods.widget.GoodsSkuPopView
-import kotlinx.android.synthetic.main.fragment_category.*
 import kotlinx.android.synthetic.main.fragment_goods_detail_tab_one.*
-import org.jetbrains.anko.support.v4.startActivity
+import org.jetbrains.anko.support.v4.toast
 
 class GoodsDetailTabOneFragment : BaseMvpFragment<GoodsDetailPresenter>(),GoodsDetailView{
+
     private lateinit var mSkuPop:GoodsSkuPopView
     private lateinit var mAnimationStart: Animation
     private lateinit var mAnimationEnd: Animation
+    private lateinit var mCurGoods:Goods
 
     override fun initComponent() {
         DaggerGoodsComponent.builder().activityComponent(activityComponent).goodsModule(GoodsModule()).build().inject(this)
@@ -70,6 +59,8 @@ class GoodsDetailTabOneFragment : BaseMvpFragment<GoodsDetailPresenter>(),GoodsD
     }
 
     override fun onGoodsDetailResult(result: Goods) {
+        mCurGoods = result
+
         mGoodsDetailBanner.setImages(result.goodsBanner.split(","))
         mGoodsDetailBanner.start()
         mGoodsDescTv.text = result.goodsDesc
@@ -83,6 +74,10 @@ class GoodsDetailTabOneFragment : BaseMvpFragment<GoodsDetailPresenter>(),GoodsD
 
         Bus.send(GoodsDetailImageEvent(result.goodsDetailOne,result.goodsDetailTwo))
         loadPopData(result)
+    }
+
+    override fun onAddCartResult(result: Int) {
+        toast("Cart${result}")
     }
 
     private fun initPop() {
@@ -101,6 +96,10 @@ class GoodsDetailTabOneFragment : BaseMvpFragment<GoodsDetailPresenter>(),GoodsD
         Bus.observe<SkuChangedEvent>().subscribe{
             mSkuSelectedTv.text = mSkuPop.getSelectSku()+GoodsConstant.SKU_SEPARATOR+mSkuPop.getSelectCount()+"件"
         }.registerInBus(this)
+
+        Bus.observe<AddCartEvent>().subscribe{
+            addCart()
+        }.registerInBus(this)
     }
 
     override fun onDestroy() {
@@ -118,5 +117,12 @@ class GoodsDetailTabOneFragment : BaseMvpFragment<GoodsDetailPresenter>(),GoodsD
                 0.95f, 1f, 0.95f, 1f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f)
         mAnimationEnd.duration = 500
         mAnimationEnd.fillAfter = true
+    }
+
+    private fun addCart(){
+        mCurGoods?.let {
+            mPresenter.addCart(it.id,it.goodsDesc,it.goodsDefaultIcon,it.goodsDefaultPrice,
+                    mSkuPop.getSelectCount(),mSkuPop.getSelectSku())
+        }
     }
 }

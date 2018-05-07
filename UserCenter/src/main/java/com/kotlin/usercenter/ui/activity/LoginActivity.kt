@@ -2,8 +2,10 @@ package com.kotlin.usercenter.ui.activity
 
 import android.os.Bundle
 import android.view.View
+import com.alibaba.android.arouter.facade.annotation.Route
 import com.kotlin.base.ext.enable
 import com.kotlin.base.ui.activity.BaseMvpActivity
+import com.kotlin.provider.router.RouterPath
 import com.kotlin.user.utils.UserPrefsUtils
 import com.kotlin.usercenter.R
 import com.kotlin.usercenter.data.protocol.UserInfo
@@ -13,7 +15,7 @@ import com.kotlin.usercenter.presenter.LoginPresenter
 import com.kotlin.usercenter.presenter.view.LoginView
 import kotlinx.android.synthetic.main.activity_login.*
 import org.jetbrains.anko.startActivity
-
+@Route(path = RouterPath.UserCenter.PATH_LOGIN)
 class LoginActivity : BaseMvpActivity<LoginPresenter>(), LoginView, View.OnClickListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {

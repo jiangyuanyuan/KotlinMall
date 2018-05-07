@@ -3,6 +3,12 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-android-extensions'
 
+
+kapt {
+    arguments {
+        arg("moduleName", project.getName())
+    }
+}
 android {
     compileSdkVersion 25
 
@@ -35,7 +41,7 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
 
     //Dagger2
-    implementation "com.google.dagger:dagger:$dagger_version"
-    implementation 'com.android.support.constraint:constraint-layout:1.1.0'
     kapt "com.google.dagger:dagger-compiler:$dagger_version"
+    //ARouter
+    kapt "com.alibaba:arouter-compiler:$arouter_compiler_version"
 }
