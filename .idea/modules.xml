@@ -7,6 +7,7 @@
       <module fileurl="file://$PROJECT_DIR$/GoodsCenter/GoodsCenter.iml" filepath="$PROJECT_DIR$/GoodsCenter/GoodsCenter.iml" />
       <module fileurl="file://$PROJECT_DIR$/KMall.iml" filepath="$PROJECT_DIR$/KMall.iml" />
       <module fileurl="file://$PROJECT_DIR$/MessageCenter/MessageCenter.iml" filepath="$PROJECT_DIR$/MessageCenter/MessageCenter.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Ordercenter/Ordercenter.iml" filepath="$PROJECT_DIR$/Ordercenter/Ordercenter.iml" />
       <module fileurl="file://$PROJECT_DIR$/Provider/Provider.iml" filepath="$PROJECT_DIR$/Provider/Provider.iml" />
       <module fileurl="file://$PROJECT_DIR$/UserCenter/UserCenter.iml" filepath="$PROJECT_DIR$/UserCenter/UserCenter.iml" />
     </modules>
