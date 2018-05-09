@@ -2,7 +2,6 @@ package com.kotlin.order.data.protocol
 
 import android.os.Parcel
 import android.os.Parcelable
-import kotlinx.android.parcel.Parcelize
 
 /*
    收货地址

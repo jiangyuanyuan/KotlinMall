@@ -2,7 +2,7 @@
 
 buildscript {
     ext.android_support_version = "25.3.1"
-    ext.kotlin_version ='1.2.0'
+    ext.kotlin_version ='1.2.41'
     ext.anko_version='0.10.4'
     ext.ok_http_version = '3.4.1'
     ext.retrofit_version = '2.4.0'
@@ -22,8 +22,8 @@ buildscript {
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.1.2'
+//        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
