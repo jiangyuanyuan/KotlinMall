@@ -2,11 +2,8 @@
 
 buildscript {
     ext.android_support_version = "25.3.1"
-    ext.kotlin_version ='1.2.30'
+    ext.kotlin_version ='1.2.0'
     ext.anko_version='0.10.4'
-
-
-    ext.anko_version = '0.10.1'
     ext.ok_http_version = '3.4.1'
     ext.retrofit_version = '2.4.0'
     ext.dagger_version = '2.11'
@@ -24,7 +21,7 @@ buildscript {
         maven { url "https://jitpack.io" }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.1.1'
+        classpath 'com.android.tools.build:gradle:3.1.2'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
 
         // NOTE: Do not place your application dependencies here; they belong
