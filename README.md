@@ -14,7 +14,7 @@ A pure shopping App based on Kotlin + ARouter + MVP + RxJava2 + Retrofit + Dagge
 
 
 #### Points
-
+#### English
 + The entire project is written in kotlin
 + Inter-module communication (page jump and service management) using the ARouter framework
 + Developed using MVP architecture pattern (Presenter is directly implemented, so there is no contract class Contract)
@@ -30,7 +30,7 @@ A pure shopping App based on Kotlin + ARouter + MVP + RxJava2 + Retrofit + Dagge
 + Use BGA-refreshlayout to achieve pull-up refresh, pull-down loading
 + Use Aurora to push Jpush to do message push service
 
-
+#### 中文
 + 整个项目采用kotlin语言编写
 + 使用ARouter框架进行模块间通信(页面的跳转以及服务管理)
 + 使用MVP架构模式开发(Presenter直接是实现方法的,所以没有契约类Contract)
